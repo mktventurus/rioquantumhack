@@ -1,0 +1,29 @@
+---
+// Site header / navigation. Every element carries a semantic class defined in
+// src/styles/main.css — click any of them in the visual editor to edit its rule.
+import LangSwitch from './LangSwitch.astro';
+import { translations, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = translations[lang];
+const home = `/${lang}/`;
+---
+
+<header class="site-header">
+  <nav class="site-nav">
+    <a class="nav-logo" href={home}>
+      RIO QUANTUM HACK <span class="nav-logo-mark">// '26</span>
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href={`${home}#purpose`}>{t.nav.purpose}</a>
+      <a class="nav-link" href={`${home}#programme`}>{t.nav.programme}</a>
+      <a class="nav-link" href={`${home}#partners`}>{t.nav.partners}</a>
+      <a class="nav-cta" href={`${home}#participate`}>{t.nav.join}</a>
+      <LangSwitch lang={lang} />
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,82 @@
+---
+// Tabbed agenda: one tab per event day, vanilla JS toggles which panel is
+// visible. Day headers (month, day number, weekday) are computed at build
+// time from each day's ISO date, localized to the page language.
+import { translations, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = translations[lang];
+const locale = t.locale;
+
+const days = t.programme.days.map((d) => {
+  const dt = new Date(`${d.date}T00:00:00`);
+  return {
+    ...d,
+    monthYear: new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }).format(dt),
+    dayNumber: new Intl.DateTimeFormat(locale, { day: '2-digit' }).format(dt),
+    weekday: new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(dt),
+  };
+});
+---
+
+<div class="agenda">
+  <div class="agenda-tabs" role="tablist">
+    {
+      days.map((d, i) => (
+        <button
+          type="button"
+          class="agenda-tab"
+          data-day={d.id}
+          aria-selected={i === 0 ? 'true' : 'false'}
+        >
+          <span class="agenda-tab-dot" />
+          {d.tabLabel}
+        </button>
+      ))
+    }
+  </div>
+
+  {
+    days.map((d, i) => (
+      <div class="agenda-panel" data-day-panel={d.id} style={i === 0 ? undefined : 'display:none'}>
+        <div class="agenda-day-header">
+          <span class="agenda-day-monthyear">{d.monthYear}</span>
+          <span class="agenda-day-number">{d.dayNumber}</span>
+          <span class="agenda-day-caption">
+            {d.weekday} · {d.dayLabel}
+          </span>
+        </div>
+        <div class="agenda-list">
+          {
+            d.items.map((item) => (
+              <div class="agenda-item">
+                <span class="agenda-item-time">{item.time}</span>
+                <span class="agenda-item-title">{item.title}</span>
+                <span class="agenda-tag">{item.tag}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.agenda-tab');
+  const panels = document.querySelectorAll<HTMLElement>('.agenda-panel');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const day = tab.getAttribute('data-day');
+      tabs.forEach((t) => t.setAttribute('aria-selected', t === tab ? 'true' : 'false'));
+      panels.forEach((panel) => {
+        panel.style.display = panel.getAttribute('data-day-panel') === day ? '' : 'none';
+      });
+    });
+  });
+</script>

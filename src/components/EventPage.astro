@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Particles from './Particles.astro';
+import AgendaTabs from './AgendaTabs.astro';
+import Countdown from './Countdown.astro';
+import { translations, MAPS_URL, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = translations[lang];
+---
+
+<Layout lang={lang}>
+  <section class="hero">
+    <Particles />
+    <div class="hero-content">
+      <span class="hero-eyebrow"><span class="hero-eyebrow-line"></span> {t.hero.eyebrow}</span>
+      <h1 class="hero-title">
+        {t.hero.titleBefore}<span class="hero-title-accent">{t.hero.titleAccent}</span>{t.hero.titleAfter}
+      </h1>
+      <p class="hero-subtitle">{t.hero.subtitle}</p>
+      <div class="hero-meta">
+        <span class="hero-meta-item"><span class="hero-meta-icon">◆</span> {t.hero.dates}</span>
+        <span class="hero-meta-item"><span class="hero-meta-icon">◆</span> {t.hero.location}</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#participate">{t.hero.ctaPrimary}</a>
+        <a class="btn-secondary" href="#programme">{t.hero.ctaSecondary}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="purpose">
+    <div class="purpose-layout">
+      <div class="purpose-col">
+        <span class="section-eyebrow">{t.purpose.eyebrow}</span>
+        <h2 class="section-title">{t.purpose.title}</h2>
+        <p class="section-text">
+          {t.purpose.textBefore}<span class="section-text-strong">{t.purpose.textStrong}</span>{t.purpose.textAfter}
+        </p>
+      </div>
+      <div class="purpose-stats">
+        <Countdown lang={lang} />
+        <div class="stat-row">
+          <div class="stat-block">
+            <span class="stat-label">{t.purpose.stats.hostedLabel}</span>
+            <span class="stat-value">{t.purpose.stats.hostedValue}</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-label">{t.purpose.stats.programmeLabel}</span>
+            <span class="stat-value">{t.purpose.stats.programmeValue}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="programme">
+    <span class="section-eyebrow">{t.programme.eyebrow}</span>
+    <h2 class="section-title">{t.programme.title}</h2>
+    <p class="section-text">{t.programme.subtitle}</p>
+    <div class="programme-wrap">
+      <AgendaTabs lang={lang} />
+    </div>
+    <p class="programme-note">
+      <span class="programme-note-dot"></span>
+      {t.programme.note}
+    </p>
+  </section>
+
+  <section class="cta" id="participate">
+    <div class="cta-inner">
+      <span class="cta-eyebrow">{t.participate.eyebrow}</span>
+      <h2 class="cta-title">{t.participate.title}</h2>
+      <p class="cta-text">{t.participate.text}</p>
+      <div class="cta-actions">
+        <span class="btn-disabled"><span class="btn-disabled-dot"></span> {t.participate.ctaDisabled}</span>
+        <a
+          class="cta-location"
+          href={MAPS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={t.participate.locationFull}
+        >
+          <span class="cta-location-dot">◆</span> {t.participate.location}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="partners">
+    <span class="section-eyebrow">{t.partners.eyebrow}</span>
+    <h2 class="section-title">{t.partners.title}</h2>
+    <div class="partners-grid">
+      {
+        t.partners.items.map((p) => (
+          <div class="partner-card">
+            <span class="partner-tag">// {p.tag}</span>
+            <div class="partner-logo">
+              {p.logo ? (
+                <img class="partner-logo-img" src={p.logo} alt={`${p.name} logo`} loading="lazy" />
+              ) : (
+                <span class="partner-logo-fallback">{p.name}</span>
+              )}
+            </div>
+            <span class="partner-name">{p.name}</span>
+            <span class="partner-subtitle">{p.subtitle}</span>
+          </div>
+        ))
+      }
+    </div>
+    <p class="partners-intro">{t.partners.intro}</p>
+  </section>
+</Layout>

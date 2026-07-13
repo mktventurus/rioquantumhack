@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Read(//c/Users/PAULOC~1/AppData/Local/Temp/claude/C--Users-Paulo-Cardoso-ShipStudio-rioquantumhack/87e0e0d1-f864-452a-a169-244b5a0955a2/scratchpad/**)",
+      "Bash(node extract.js)"
+    ]
+  }
+}

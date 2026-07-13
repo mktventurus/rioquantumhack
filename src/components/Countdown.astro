@@ -1,0 +1,63 @@
+---
+// Live countdown to kickoff. Vanilla JS ticks the four boxes every second
+// client-side; the server only renders the initial "--" placeholders.
+import { translations, KICKOFF_ISO, type Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+const t = translations[lang].purpose.stats;
+---
+
+<div class="countdown" data-target={KICKOFF_ISO}>
+  <span class="countdown-label">{t.countdownLabel}</span>
+  <div class="countdown-grid">
+    <div class="countdown-box">
+      <span class="countdown-value" data-unit="days">--</span>
+      <span class="countdown-unit">{t.days}</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-value" data-unit="hours">--</span>
+      <span class="countdown-unit">{t.hours}</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-value" data-unit="min">--</span>
+      <span class="countdown-unit">{t.min}</span>
+    </div>
+    <div class="countdown-box">
+      <span class="countdown-value" data-unit="sec">--</span>
+      <span class="countdown-unit">{t.sec}</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function pad(n: number) {
+    return String(n).padStart(2, '0');
+  }
+
+  document.querySelectorAll<HTMLElement>('.countdown').forEach((el) => {
+    const target = new Date(el.dataset.target || '').getTime();
+    const days = el.querySelector<HTMLElement>('[data-unit="days"]');
+    const hours = el.querySelector<HTMLElement>('[data-unit="hours"]');
+    const min = el.querySelector<HTMLElement>('[data-unit="min"]');
+    const sec = el.querySelector<HTMLElement>('[data-unit="sec"]');
+
+    function tick() {
+      const diff = Math.max(0, target - Date.now());
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      if (days) days.textContent = String(d);
+      if (hours) hours.textContent = pad(h);
+      if (min) min.textContent = pad(m);
+      if (sec) sec.textContent = pad(s);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  });
+</script>

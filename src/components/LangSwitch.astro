@@ -1,0 +1,38 @@
+---
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props as Props;
+---
+
+<div class="lang-switch">
+  <a
+    class={`lang-switch-option ${lang === 'en' ? 'lang-switch-option-active' : ''}`}
+    href="/en/"
+    data-lang="en"
+  >
+    EN
+  </a>
+  <span class="lang-switch-sep">/</span>
+  <a
+    class={`lang-switch-option ${lang === 'pt' ? 'lang-switch-option-active' : ''}`}
+    href="/pt/"
+    data-lang="pt"
+  >
+    PT
+  </a>
+</div>
+
+<script>
+  // Persist the visitor's manual choice so it wins over auto-detection on
+  // their next visit (see the redirect script in src/pages/index.astro).
+  document.querySelectorAll('.lang-switch-option').forEach((el) => {
+    el.addEventListener('click', () => {
+      const lang = el.getAttribute('data-lang');
+      if (lang) localStorage.setItem('rqh-lang', lang);
+    });
+  });
+</script>
