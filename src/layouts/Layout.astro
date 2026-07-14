@@ -37,5 +37,27 @@ const altLang = lang === 'en' ? 'pt' : 'en';
       <slot />
     </main>
     <Footer lang={lang} />
+    <script>
+      // Reveals .section / .cta blocks with a fade-up as they scroll into view.
+      const revealTargets = document.querySelectorAll('.section, .cta');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealTargets.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+        );
+        revealTargets.forEach((el) => observer.observe(el));
+      }
+    </script>
   </body>
 </html>
