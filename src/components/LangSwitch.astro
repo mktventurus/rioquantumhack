@@ -5,23 +5,12 @@ interface Props {
 }
 const { lang } = Astro.props as Props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const cls = (l: Lang) => `lang-switch-option ${lang === l ? 'lang-switch-option-active' : ''}`;
 ---
 <div class="lang-switch">
-  
-    class={`lang-switch-option ${lang === 'en' ? 'lang-switch-option-active' : ''}`}
-    href={`${base}/en/`}
-    data-lang="en"
-  >
-    EN
-  </a>
+  <a class={cls('en')} href={`${base}/en/`} data-lang="en">EN</a>
   <span class="lang-switch-sep">/</span>
-  
-    class={`lang-switch-option ${lang === 'pt' ? 'lang-switch-option-active' : ''}`}
-    href={`${base}/pt/`}
-    data-lang="pt"
-  >
-    PT
-  </a>
+  <a class={cls('pt')} href={`${base}/pt/`} data-lang="pt">PT</a>
 </div>
 <script>
   // Persist the visitor's manual choice so it wins over auto-detection on
