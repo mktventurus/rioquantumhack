@@ -1,16 +1,16 @@
 ---
 // Language gateway: detects the visitor's preferred language (a saved choice
 // first, then the browser's Accept-Language via navigator.language) and
-// redirects to /en/ or /pt/. Runs synchronously in <head>, before paint, to
-// avoid a flash of the wrong language. The meta-refresh + noscript link cover
-// crawlers and JS-disabled visitors.
+// redirects to en/ or pt/ (relative to the current base path). Runs
+// synchronously in <head>, before paint, to avoid a flash of the wrong
+// language. The meta-refresh + noscript link cover crawlers and JS-disabled
+// visitors.
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=/en/" />
+    <meta http-equiv="refresh" content="0; url=en/" />
     <script is:inline>
       (function () {
         var saved = localStorage.getItem('rqh-lang');
@@ -21,14 +21,14 @@
             ? 'pt'
             : 'en';
         }
-        location.replace('/' + lang + '/' + location.search + location.hash);
+        location.replace(lang + '/' + location.search + location.hash);
       })();
     </script>
   </head>
   <body>
     <noscript>
       <p>
-        <a href="/en/">Continue in English</a> · <a href="/pt/">Continuar em Português</a>
+        <a href="en/">Continue in English</a> · <a href="pt/">Continuar em Português</a>
       </p>
     </noscript>
   </body>
