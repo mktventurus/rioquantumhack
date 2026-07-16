@@ -79,15 +79,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       <p class="cta-text">{t.participate.text}</p>
       <div class="cta-actions">
         <span class="btn-disabled"><span class="btn-disabled-dot"></span> {t.participate.ctaDisabled}</span>
-        
-          class="cta-location"
-          href={MAPS_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          title={t.participate.locationFull}
-        >
-          <span class="cta-location-dot">◆</span> {t.participate.location}
-        </a>
+        <a class="cta-location" href={MAPS_URL} target="_blank" rel="noopener noreferrer" title={t.participate.locationFull}><span class="cta-location-dot">◆</span> {t.participate.location}</a>
       </div>
     </div>
   </section>
