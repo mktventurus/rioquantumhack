@@ -6,7 +6,7 @@ export const translations = {
     htmlLang: 'en',
     locale: 'en-US',
     meta: {
-      title: 'Rio Quantum Hack — Quantum Computing Applications for Food Security and Environmental Protection',
+      title: 'Quantum Computing and Sustainability: Hackathon and Workshop — Quantum Computing Applications for Food Security and Environmental Protection',
       description:
         'Nov 30–Dec 2, 2026 at CBPF, Rio de Janeiro. A regional hackathon exploring quantum computing for food security and environmental protection, part of the Open Quantum Institute global initiative.',
     },
@@ -103,6 +103,7 @@ export const translations = {
       title: 'Join us in Rio de Janeiro',
       text: 'Take part in the Quantum Computing Applications for Food Security and Environmental Protection Regional Event, hosted at CBPF.',
       ctaDisabled: 'Applications opening soon',
+      subscribe: 'Subscribe here',
       location: 'CBPF, Rio de Janeiro, Brazil',
       locationFull: 'Centro Brasileiro de Pesquisas Físicas (CBPF) — Rua Dr. Xavier Sigaud, 150, Urca, Rio de Janeiro, RJ, Brazil',
     },
@@ -128,7 +129,7 @@ export const translations = {
     htmlLang: 'pt-BR',
     locale: 'pt-BR',
     meta: {
-      title: 'Rio Quantum Hack — Computação Quântica Aplicada à Segurança Alimentar e Proteção Ambiental',
+      title: 'Quantum Computing and Sustainability: Hackathon and Workshop — Computação Quântica Aplicada à Segurança Alimentar e Proteção Ambiental',
       description:
         '30 de novembro a 2 de dezembro de 2026, no CBPF, Rio de Janeiro. Um hackathon regional que explora computação quântica para segurança alimentar e proteção ambiental, parte da iniciativa global do Open Quantum Institute.',
     },
@@ -224,6 +225,7 @@ export const translations = {
       eyebrow: 'Participação',
       title: 'Venha para o Rio de Janeiro',
       text: 'Participe do Quantum Computing Applications for Food Security and Environmental Protection Regional Event, sediado no CBPF.',
+      subscribe: 'Inscreva-se aqui',
       ctaDisabled: 'Inscrições em breve',
       location: 'CBPF, Rio de Janeiro, Brasil',
       locationFull: 'Centro Brasileiro de Pesquisas Físicas (CBPF) — Rua Dr. Xavier Sigaud, 150, Urca, Rio de Janeiro, RJ, Brasil',
