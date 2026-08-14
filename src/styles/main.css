@@ -10,19 +10,19 @@
 
 /* ── Design tokens ───────────────────────────────────────────────── */
 :root {
-  --background: #08080c;
-  --surface: #121218;
-  --surface-raised: #17171f;
-  --foreground: #f5f5f2;
-  --muted: #9a9aa8;
-  --border: #26262f;
-  --accent: #b794f4;
-  --accent-strong: #9f6fe8;
-  --accent-soft: #d6bbfb;
+  --background: #061426;
+  --surface: #0a2238;
+  --surface-raised: #0d2b45;
+  --foreground: #f5faff;
+  --muted: #9cc6d8;
+  --border: #16425f;
+  --accent: #18c7c9;
+  --accent-strong: #4ddb7a;
+  --accent-soft: #ffc928;
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --maxw: 1120px;
+  --maxw: 1260px;
 }
 
 /* ── Motion ──────────────────────────────────────────────────────── */
